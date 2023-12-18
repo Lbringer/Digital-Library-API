@@ -14,13 +14,23 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
-@Table
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+@Builder
 public class Book {
 	
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -29,6 +39,7 @@ public class Book {
 	private String name;
 	
 	@ManyToOne
+	@JoinColumn
 	private Author myAuthor;
 	
 	
@@ -36,9 +47,10 @@ public class Book {
 	private Genre genre;
 	
 	@ManyToOne
+	@JoinColumn
 	private Student student;
 	
-	@OneToMany
+	@OneToMany(mappedBy = "book")
 	private List<Transaction> transactions;
 	
 	@CreationTimestamp
