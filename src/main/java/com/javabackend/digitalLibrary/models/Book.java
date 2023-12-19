@@ -7,7 +7,8 @@ import java.util.List;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import jakarta.annotation.Generated;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -15,10 +16,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -40,6 +39,7 @@ public class Book {
 	
 	@ManyToOne
 	@JoinColumn
+	@JsonIgnoreProperties(value = "bookList")
 	private Author myAuthor;
 	
 	
@@ -48,9 +48,11 @@ public class Book {
 	
 	@ManyToOne
 	@JoinColumn
+	@JsonIgnoreProperties(value = "bookList")
 	private Student student;
 	
 	@OneToMany(mappedBy = "book")
+	@JsonIgnoreProperties(value = "book")
 	private List<Transaction> transactions;
 	
 	@CreationTimestamp

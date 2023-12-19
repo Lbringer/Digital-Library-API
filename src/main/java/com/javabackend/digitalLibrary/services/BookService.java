@@ -20,14 +20,16 @@ public class BookService {
 
 	public void createBook(Book book) {
 		 Author author = authorService.createOrGetAuthor(book.getMyAuthor());
+		 book.setMyAuthor(author);
+		 bookRepos.save(book);
 	}
 
 	public List<Book> getAllBooks() {
-		return null;
+		return bookRepos.findAll();
 	}
 
 	public Book getBookById(int id) {
-		return null;
+		return  bookRepos.findById(id).orElse(null);
 	}
 
 }

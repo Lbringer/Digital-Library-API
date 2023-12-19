@@ -1,5 +1,7 @@
 package com.javabackend.digitalLibrary.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,9 +19,15 @@ public class StudentService {
 	public void createStudent(@Valid Student student) {
 		studentRepo.save(student);
 	}
+	
+	public List<Student> getAllStudents() {
+		return studentRepo.findAll();
+	}
 
 	public Student getStudentById(int id) {
 		return studentRepo.findById(id).orElse(null);
 	}
+
+	
 
 }

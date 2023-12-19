@@ -6,6 +6,8 @@ import java.util.List;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -31,9 +33,11 @@ public class Student {
 	private String email;
 
 	@OneToMany(mappedBy = "student")
+	@JsonIgnoreProperties(value = "student")
 	private List<Book> bookList;
 
 	@OneToMany(mappedBy = "student")
+	@JsonIgnoreProperties(value = "student")
 	private List<Transaction> transaction;
 
 	@CreationTimestamp

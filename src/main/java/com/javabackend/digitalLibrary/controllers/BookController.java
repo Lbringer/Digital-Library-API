@@ -9,7 +9,6 @@ import com.javabackend.digitalLibrary.createRequest.BookReq;
 import com.javabackend.digitalLibrary.models.Book;
 import com.javabackend.digitalLibrary.services.BookService;
 
-import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/book")
@@ -18,12 +17,13 @@ public class BookController {
 	@Autowired
 	BookService bookService;
 	
+	
 	@PostMapping("/create")
-	public void createBook(@Valid @RequestBody BookReq bookReq) {
+	public void createBook(@RequestBody BookReq bookReq) {
 		bookService.createBook(bookReq.to());
 	}
 	
-	@GetMapping("/")
+	@GetMapping("/all")
 	public List<Book> getAllBooks(){
 		return bookService.getAllBooks();
 	}
